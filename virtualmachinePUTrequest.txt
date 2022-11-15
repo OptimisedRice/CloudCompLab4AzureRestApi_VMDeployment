@@ -1,0 +1,52 @@
+PUT https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.Compute/virtualMachines/{{virtualMachine}}?api-version=2022-08-01
+
+body:
+{
+  "location": "{{location}}",
+  "properties": {
+    "hardwareProfile": {
+      "vmSize": "Standard_D2s_v3"
+    },
+    "storageProfile": {
+      "imageReference": {
+        "sku": "16.04-LTS",
+        "publisher": "Canonical",
+        "version": "latest",
+        "offer": "UbuntuServer"
+      },
+      "osDisk": {
+        "caching": "ReadWrite",
+        "managedDisk": {
+          "storageAccountType": "Premium_LRS"
+        },
+        "name": "{{diskName}}",
+        "createOption": "FromImage"
+      }
+    },
+    "osProfile": {
+      "adminUsername": "{{username}}",
+      "computerName": "myVM",
+      "linuxConfiguration": {
+        "ssh": {
+          "publicKeys": [
+          {
+          "path": "/home/{{username}}/.ssh/authorized_keys",
+          "keyData": "{{sshKey}}"
+        }
+        ]
+        },
+        "disablePasswordAuthentication": true
+       }
+    },
+    "networkProfile": {
+      "networkInterfaces": [
+        {
+          "id": "/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.Network/networkInterfaces/{{networkInterface}}",
+          "properties": {
+            "primary": true
+          }
+        }
+      ]
+    }
+  }
+}

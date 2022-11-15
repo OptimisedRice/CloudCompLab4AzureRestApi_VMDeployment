@@ -1,0 +1,14 @@
+PUT https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.Network/publicIPAddresses/{{ipName}}?api-version=2022-05-01
+
+body:
+{
+  "properties": {
+    "publicIPAllocationMethod": "Static",
+    "idleTimeoutInMinutes": 10,
+    "publicIPAddressVersion": "IPv4"
+  },
+  "sku": {
+    "name": "Basic"
+  },
+  "location": "{{location}}"
+}

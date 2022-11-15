@@ -1,0 +1,24 @@
+PUT https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.Network/networkInterfaces/{{networkInterface}}?api-version=2022-05-01
+
+body:
+{
+  "properties": {
+    "ipConfigurations": [
+      {
+        "name": "ipconfig1",
+        "properties": {
+          "publicIPAddress": {
+            "id": "/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.Network/publicIPAddresses/{{ipName}}"
+          },
+          "subnet": {
+            "id": "/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.Network/virtualNetworks/{{resourceGroup}}-vnet/subnets/default"
+          }
+        }
+      }
+    ],
+    "networkSecurityGroup": {
+          "id": "/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroup}}/providers/Microsoft.Network/networkSecurityGroups/{{nsgName}}"
+        }
+  },
+  "location": "{{location}}"
+}
