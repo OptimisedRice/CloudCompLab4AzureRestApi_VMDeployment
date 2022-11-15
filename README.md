@@ -1,0 +1,1 @@
+# CloudCompLab4AzureRestApi_VMDeployment
